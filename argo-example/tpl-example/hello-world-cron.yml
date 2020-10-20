@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: hello-world-cron
+spec:
+  schedule: "*/1 * * * *"
+  concurrencyPolicy: "Replace"
+  workflowSpec:
+    entrypoint: hello-world
+    templates:
+      - name: hello-world
+        dag:
+          tasks:
+            - name: task-hello-world
+              templateRef:
+                name: hello-world-tpl
+                template: hello-world-tpl

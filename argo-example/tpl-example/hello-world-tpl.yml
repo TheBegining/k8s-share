@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: hello-world-tpl
+spec:
+  entrypoint: hello-world-tpl
+  templates:
+    - name: hello-world-tpl
+      container:
+        image: docker/whalesay
+        command: [cowsay]
+        args: ["hello world"]
+        resources:                # limit the resources
+          limits:
+            memory: 32Mi
+            cpu: 100m

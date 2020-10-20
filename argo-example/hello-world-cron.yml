@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: CronWorkflow
+metadata:
+  name: test-cron-wf
+spec:
+  schedule: "*/1 * * * *"
+  concurrencyPolicy: "Replace"
+  startingDeadlineSeconds: 0
+  workflowSpec:
+    entrypoint: whalesay
+    templates:
+    - name: whalesay              # name of the template
+      container:
+        image: docker/whalesay
+        command: [cowsay]
+        args: ["hello world"]
+        resources:                # limit the resources
+          limits:
+            memory: 32Mi
+            cpu: 100m

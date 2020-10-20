@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-nginx
+spec:
+  template:
+    spec:
+      $setElementOrder/containers:
+      - name: my-nginx
+      containers:
+      - image: nginx:1.18
+        name: my-nginx
